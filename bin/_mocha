@@ -58,15 +58,14 @@ var images = {
 program
   .version(JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version)
   .usage('[debug] [options] [files]')
-  .option('-A, --async-only', "force all tests to take a callback (async) or return a promise")
+  .option('-A, --async-only', 'force all tests to take a callback (async) or return a promise')
   .option('-c, --colors', 'force enabling of colors')
   .option('-C, --no-colors', 'force disabling of colors')
   .option('-G, --growl', 'enable growl notification support')
   .option('-O, --reporter-options <k=v,k2=v2,...>', 'reporter-specific options')
   .option('-R, --reporter <name>', 'specify the reporter to use', 'spec')
-  .option('-S, --sort', "sort test files")
-  .option('-a, --randomize <mode>[:seed]', "randomize tests")
-  .option('-b, --bail', "bail after first test failure")
+  .option('-S, --sort', 'sort test files')
+  .option('-b, --bail', 'bail after first test failure')
   .option('-d, --debug', "enable node's debugger, synonym for node --debug")
   .option('-g, --grep <pattern>', 'only run tests matching <pattern>')
   .option('-f, --fgrep <string>', 'only run tests containing <string>')
@@ -103,6 +102,8 @@ program
   .option('--use_strict', 'enforce strict mode')
   .option('--watch-extensions <ext>,...', 'additional extensions to monitor with --watch', list, [])
   .option('--delay', 'wait for async suite definition')
+  .option('--generate-seed', 'generate a random seed and exit')
+  .option('--random [seed]', 'randomize order of tests (with optional random seed)', false);
 
 program.name = 'mocha';
 
@@ -264,11 +265,10 @@ if (program.fgrep) mocha.grep(program.fgrep);
 
 if (program.invert) mocha.invert();
 
-// --randomize
+// --random
 
-if (program.randomize) {
-  var matches = program.randomize.split(':');
-  mocha.randomize(matches[0], matches[1]);
+if (program.random) {
+  mocha.randomize(program.random);
 }
 
 // --check-leaks
