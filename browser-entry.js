@@ -154,6 +154,11 @@ mocha.run = function(fn){
 Mocha.process = process;
 
 /**
+ * Expose Mocha.seed() for browser seed generation.
+ */
+mocha.seed = Mocha.seed;
+
+/**
  * Expose mocha.
  */
 
