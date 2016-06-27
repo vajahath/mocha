@@ -226,4 +226,10 @@ describe('utils', function() {
       utils.toSafeUnsignedInteger('01234').should.equal(01234);
     });
   });
+
+  describe('.toHex', function() {
+    it('should convert an integer to hex', function() {
+      utils.toHex(0xDEADBEEF).should.equal('0xDEADBEEF');
+    });
+  });
 });
